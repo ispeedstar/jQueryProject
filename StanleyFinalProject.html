@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="description" content="PROG70007 jQuery and Javascript ">
+	<meta name="keywords" content="HTML,CSS,jQuery,JavaScript">
+	<meta name="author" content="Stanley Lam">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stanley's Final Project</title>
+	
+	<style>
+	body {
+      height: 10000px;
+      padding: 0;
+      margin: 0;
+    }
+
+    #header {
+      background: #bada55;
+      color: white;
+      font-family: Droid Sans;
+      font-size: 14px;
+      line-height: 1.6em;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.2);
+      width:100%;
+      box-sizing:border-box;
+    }
+	
+	.wrapper {
+    	height: 100% !important;
+    	height: 100%;
+    	margin: 0 auto; 
+    	overflow: hidden;
+    }
+	
+	.centerImg {
+		display: block;
+		margin: auto;
+	}
+	
+	.ClassNHL {
+		position: absolute;
+		left: 0px;
+	}
+	
+	table, th, td {
+		border: 1px solid black;
+	}
+	
+	th {
+		background-color: red;
+		color: black;
+	}
+	
+	#imagelist img {
+		max-width: 150px
+	}
+	
+	#teamE1 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE2 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE3 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE4 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE5 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE6 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE7 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamE8 { width: 100px; height: 50px; padding: 0.5em;}
+	
+	#teamW1 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW2 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW3 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW4 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW5 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW6 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW7 { width: 100px; height: 50px; padding: 0.5em;}
+	#teamW8 { width: 100px; height: 50px; padding: 0.5em;}
+	
+	#droppable { width: 250px; height: 200px; padding: 0.5em;}
+	</style>
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<link href='css/onepage-scroll.css' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css">
+		
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/jquery.sticky.js"></script>
+		<script type="text/javascript" src="js/jquery.onepage-scroll.js"></script>
+		<script src="js/jquery.flexslider.js"></script>
+		<script src="js/jquery.fancybox.min.js"></script>
+  <script>
+  /* 	Final Project
+		c. One page scroller with easing plugin: 10%
+		d. 5 additional plugin codes (accordion, hover effects, sticky header etc): 20%
+		e. Gallery (with filter and lightbox): 20%
+		f. 5 Examples of hand coded animations and effects: 20%
+	*/
+	$(document).ready(function()
+	{
+		//c. One page scroller with easing plugin: 10%
+		$(".main").onepage_scroll({
+			sectionContainer: "section",
+			responsiveFallback: 600,
+			loop: true
+		});  
+		
+		//d. Add a sticky header
+		$("#header").sticky({ topSpacing: 0 });
+		
+		// f.  Add image animation
+		$(".ClassNHL").animate({ left: "+=600px" }, 10000 );
+		
+		//d. Add hover effect
+		$("#hoverImg").hover(function() {
+			$('#hoverImg').animate({
+			height:"400px"}
+			, function() {
+			});
+		});
+		
+		// d. Add a jquery ui accordion
+		$( "#accordion" ).accordion();
+		
+		// f. Add animation and effects
+		$("tr").filter(":even").css({"background-color":"silver", "color":"blue"});
+		$("tr").filter(":odd").css({"background-color":"black", "color":"silver"});
+		$("#tableHeader").first().css( "background-color", "red" );
+		
+		// e. Gallery (FlexSlider and FancyBox)
+		$('.flexslider').flexslider({
+			animation: "slide",
+			animationLoop: false,
+			itemWidth: 210,
+			itemMargin: 5
+		});
+		
+		//f. Examples of hand coded animations and effects
+		$('#ImgTable button').click(function() {
+			$("#tableHeader").first().css( "background-color", "blue" );
+			switch (this.id) 
+			{
+				case 'btnImgE1':
+					$("#imgE1").slideUp(2000);
+					break;
+				case 'btnImgE2':
+					$("#imgE2").slideUp(2000);
+					break;
+				case 'btnImgW1':
+					$("#imgW1").slideUp(2000);
+					break;
+				case 'btnImgW2':
+					$("#imgW2").slideUp(2000);
+					break;
+				case 'btnImgE3':
+					$("#imgE3").hide();
+					break;
+				case 'btnImgE4':
+					$("#imgE4").hide();
+					break;
+				case 'btnImgW3':
+					$("#imgW3").hide();
+					break;
+				case 'btnImgW4':
+					$("#imgW4").hide();
+					break;
+				case 'btnImgE5':
+					$("#imgE5").toggle(1000);
+					break;
+				case 'btnImgE6':
+					$("#imgE6").toggle(1000);
+					break;
+				case 'btnImgW5':
+					$("#imgW5").toggle(1000);
+					break;
+				case 'btnImgW6':
+					$("#imgW6").toggle(1000);
+					break;
+				case 'btnImgE7':
+					$("#imgE7").fadeOut('slow',function(){
+					});
+					break;
+				case 'btnImgE8':
+					$("#imgE8").fadeOut('slow',function(){
+					});
+					break;
+				case 'btnImgW7':
+					$("#imgW7").fadeOut('slow',function(){
+					});
+					break;
+				case 'btnImgW8':
+					$("#imgW8").fadeOut('slow',function(){
+					});
+					break;
+				default:
+					// do nothing
+					break;
+			}
+		});
+		
+		//f. Examples of hand coded animations and effects
+		$( "#teamE1" ).draggable();
+		$( "#teamE2" ).draggable();
+		$( "#teamE3" ).draggable();
+		$( "#teamE4" ).draggable();
+		$( "#teamE5" ).draggable();
+		$( "#teamE6" ).draggable();
+		$( "#teamE7" ).draggable();
+		$( "#teamE8" ).draggable();
+		
+		$( "#teamW1" ).draggable();
+		$( "#teamW2" ).draggable();
+		$( "#teamW3" ).draggable();
+		$( "#teamW4" ).draggable();
+		$( "#teamW5" ).draggable();
+		$( "#teamW6" ).draggable();
+		$( "#teamW7" ).draggable();
+		$( "#teamW8" ).draggable();
+		$( "#droppable" ).droppable({
+		  drop: function( event, ui ) {
+			$( this )
+			  .addClass( "ui-state-highlight" )
+			  .find( "p" )
+				.html( " *** Stanley Cup Champion ***" );
+		  }
+		});	
+	});
+  </script>
+</head>
+<body>
+<div id="header">
+	<p><h2>NHL 2017 - Road to the Stanley Cup</h2></p>
+</div>
+<div class="wrapper">
+	<div class="main">
+	
+		<section class="page1">
+			<div class="page_container">
+				<div class="ClassNHL">
+					<img id="ImgNHL" src="images/nhl.jpg" alt="" left="0px" height="123">  
+				</div> 
+				 
+				<br><br><br><br><br><br><br><br><br>
+				<img class="centerImg" id="hoverImg" src="images/StanleyCup.jpg" alt="Stanley Cup" height=200>
+			</div>
+		</section>
+		<section class="page2">
+			<div class="page_container">
+				<h2>Team Standings</h2>
+				<div id = "accordion">
+					<h3>Atlantic Division</h3>
+					<div id="SomeID">
+						<table id="AtlanticTable">
+							<tr>
+								<th>Team</th>
+								<th>Game Plays</th>
+								<th>Win</th>
+								<th>Lose</th>
+								<th>Points</th>
+							</tr>
+							<tr>
+								<td>Montreal</td>
+								<td>82</td>
+								<td>47</td>
+								<td>26</td>
+								<td>103</td>
+							</tr>
+							<tr>
+								<td>Ottawa</td>
+								<td>82</td>
+								<td>44</td>
+								<td>28</td>
+								<td>98</td>
+							</tr>
+							<tr>
+								<td>Boston</td>
+								<td>82</td>
+								<td>44</td>
+								<td>31</td>
+								<td>95</td>
+							</tr>
+							<tr>
+								<td>Toronto</td>
+								<td>82</td>
+								<td>40</td>
+								<td>27</td>
+								<td>95</td>
+							</tr>
+						</table>
+					</div>
+
+					<h3>Metropolitan</h3>
+					<div>
+						<table id="MetroTable">
+							<tr>
+								<th>Team</th>
+								<th>Game Plays</th>
+								<th>Win</th>
+								<th>Lose</th>
+								<th>Points</th>
+							</tr>
+							<tr>
+								<td>Washington</td>
+								<td>82</td>
+								<td>55</td>
+								<td>19</td>
+								<td>118</td>
+							</tr>
+							<tr>
+								<td>Pittsburgh</td>
+								<td>82</td>
+								<td>50</td>
+								<td>21</td>
+								<td>111</td>
+							</tr>
+							<tr>
+								<td>Columbus</td>
+								<td>82</td>
+								<td>50</td>
+								<td>24</td>
+								<td>108</td>
+							</tr>
+							<tr>
+								<td>NY Rangers</td>
+								<td>82</td>
+								<td>48</td>
+								<td>28</td>
+								<td>102</td>
+							</tr>
+						</table>
+					</div>
+
+					<h3>Central Division</h3>
+					<div>
+						<table id="CentralTable">
+							<tr>
+								<th>Team</th>
+								<th>Game Plays</th>
+								<th>Win</th>
+								<th>Lose</th>
+								<th>Points</th>
+							</tr>
+							<tr>
+								<td>Chicago</td>
+								<td>82</td>
+								<td>50</td>
+								<td>23</td>
+								<td>109</td>
+							</tr>
+							<tr>
+								<td>Minnesota</td>
+								<td>82</td>
+								<td>49</td>
+								<td>25</td>
+								<td>106</td>
+							</tr>
+							<tr>
+								<td>St. Louis</td>
+								<td>82</td>
+								<td>46</td>
+								<td>29</td>
+								<td>99</td>
+							</tr>
+							<tr>
+								<td>Nashville</td>
+								<td>82</td>
+								<td>41</td>
+								<td>29</td>
+								<td>94</td>
+							</tr>
+						</table>
+					</div>
+					
+					<h3>Pacific Division</h3>
+					<div>
+						<table id="CentralTable">
+							<tr>
+								<th>Team</th>
+								<th>Game Plays</th>
+								<th>Win</th>
+								<th>Lose</th>
+								<th>Points</th>
+							</tr>
+							<tr>
+								<td>Anaheim</td>
+								<td>82</td>
+								<td>46</td>
+								<td>23</td>
+								<td>105</td>
+							</tr>
+							<tr>
+								<td>Edmonton</td>
+								<td>82</td>
+								<td>47</td>
+								<td>26</td>
+								<td>103</td>
+							</tr>
+							<tr>
+								<td>San Jose</td>
+								<td>82</td>
+								<td>46</td>
+								<td>29</td>
+								<td>99</td>
+							</tr>
+							<tr>
+								<td>Calgary</td>
+								<td>82</td>
+								<td>45</td>
+								<td>33</td>
+								<td>94</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="page3">
+			<div class="page_container">
+				<h2>Eastern Conference Teams</h2>
+				<a href="Images/Montreal2.gif" data-fancybox="group" data-caption="Montreal Canadiens">
+					<img src="Images/montreal.gif" alt="" width=125/>
+				</a>
+				<a href="Images/Ottawa2.gif" data-fancybox="group" data-caption="Ottawa Senators">
+					<img src="Images/ottawa.gif" alt="" width=125/>
+				</a>
+				<a href="Images/Toronto2.gif" data-fancybox="group" data-caption="Toronto Maple Leaf">
+					<img src="Images/toronto.gif" alt="" width=125/>
+				</a>
+				<a href="Images/Boston2.gif" data-fancybox="group" data-caption="Boston Bruins">
+					<img src="Images/boston.gif" alt="" width=125/>
+				</a>
+				<a href="Images/Washington2.gif" data-fancybox="group" data-caption="Washington Capitals">
+					<img src="Images/washington.gif" alt="" width=125/>
+				</a>
+				<a href="Images/Pittsburgh2.gif" data-fancybox="group" data-caption="Pittsburgh Penguins">
+					<img src="Images/pittsburgh.gif" alt="" width=125/>
+				</a>
+				<a href="Images/Columbus2.gif" data-fancybox="group" data-caption="Columbus Blue Jackets">
+					<img src="Images/columbus.gif" alt="" width=125/>
+				</a>
+				<a href="Images/NY_Rangers2.gif" data-fancybox="group" data-caption="New York Rangers">
+					<img src="Images/ny_rangers.gif" alt="" width=125/>
+				</a>
+			</div>
+		</section>
+		<section class="page4">
+			<div class="page_container">
+				<h2>Western Conference Teams</h2>
+				<div class="flexslider">
+					<ul class="slides">
+						<li><img src="Images/Chicago.gif" /></li>
+						<li><img src="Images/Minnesota.gif" /></li>
+						<li><img src="Images/St_Louis.gif" /></li>
+						<li><img src="Images/Nashville.gif" /></li>
+						<li><img src="Images/Anaheim.gif" /></li>
+						<li><img src="Images/Edmonton.gif" /></li>
+						<li><img src="Images/SanJose.gif" /></li>
+						<li><img src="Images/Calgary.gif" /></li>	
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="page5">
+			<div class="page_container">
+				<h2>Team Playoffs</h2>
+				<p>Select "Elimate" button to remove team picture from playoff.
+				<table id="ImgTable">
+					<tr>
+						<td><img id="imgE1" src="Images/Montreal.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgE2" src="Images/NY_Rangers.gif" alt="" width=100></td>
+						<td><b>SlideUp Effect</b></td>
+						<td><img id="imgW1" src="Images/Chicago.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgW2" src="Images/Nashville.gif" alt="" width=100></td>
+					</tr>
+					<tr>
+						<td><button id="btnImgE1">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgE2">Elminate</button></td>
+						<td></td>
+						<td><button id="btnImgW1">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgW2">Elminate</button></td>
+					</tr>
+					<tr>
+						<td><img id="imgE3" src="Images/Ottawa.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgE4" src="Images/Boston.gif" alt="" width=100></td>
+						<td><b>Hide Effect</b></td>
+						<td><img id="imgW3" src="Images/Minnesota.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgW4" src="Images/St_Louis.gif" alt="" width=100></td>
+					</tr>
+					<tr>
+						<td><button id="btnImgE3">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgE4">Elminate</button></td>
+						<td></td>
+						<td><button id="btnImgW3">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgW4">Elminate</button></td>
+					</tr>
+					<tr>
+						<td><img id="imgE5" src="Images/Washington.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgE6" src="Images/Toronto.gif" alt="" width=100></td>
+						<td><b>Toggle Effect</b></td>
+						<td><img id="imgW5" src="Images/Anaheim.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgW6" src="Images/Calgary.gif" alt="" width=100></td>
+					</tr>
+					<tr>
+						<td><button id="btnImgE5">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgE6">Elminate</button></td>
+						<td></td>
+						<td><button id="btnImgW5">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgW6">Elminate</button></td>
+					</tr>
+					<tr>
+						<td><img id="imgE7" src="Images/Pittsburgh.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgE8" src="Images/Columbus.gif" alt="" width=100></td>
+						<td><b>Fade Out Effect</b></td>
+						<td><img id="imgW7" src="Images/Edmonton.gif" alt="" width=100></td>
+						<td>vs</td>
+						<td><img id="imgW8" src="Images/SanJose.gif" alt="" width=100></td>
+					</tr>
+					<tr>
+						<td><button id="btnImgE7">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgE8">Elminate</button></td>
+						<td></td>
+						<td><button id="btnImgW7">Eliminate</button></td>
+						<td></td>
+						<td><button id="btnImgW8">Elminate</button></td>
+					</tr>
+				</table>
+			</div>
+		</section>
+		<section class="page6">
+			<div class="page_container">
+				<div id="droppable" class="ui-widget-header">
+				  <p>Drop Cup Winner Here</p>
+				</div>
+				<p>Select a winning team and drop it into the box.
+				<table>
+					<tr>
+						<td>
+							<div id="teamE1" class="ui-widget-content">
+							  <img src="Images/Montreal.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamE2" class="ui-widget-content">
+							  <img src="Images/Ottawa.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamE3" class="ui-widget-content">
+							  <img src="Images/Boston.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamE4" class="ui-widget-content">
+							  <img src="Images/Toronto.gif" width=50/>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="teamE5" class="ui-widget-content">
+							  <img src="Images/Washington.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamE6" class="ui-widget-content">
+							  <img src="Images/Pittsburgh.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamE7" class="ui-widget-content">
+							  <img src="Images/Columbus.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamE8" class="ui-widget-content">
+							  <img src="Images/NY_Rangers.gif" width=50/>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="teamW1" class="ui-widget-content">
+							  <img src="Images/Chicago.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamW2" class="ui-widget-content">
+							  <img src="Images/Minnesota.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamW3" class="ui-widget-content">
+							  <img src="Images/St_Louis.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamW4" class="ui-widget-content">
+							  <img src="Images/Nashville.gif" width=50/>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="teamW5" class="ui-widget-content">
+							  <img src="Images/Anaheim.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamW6" class="ui-widget-content">
+							  <img src="Images/Edmonton.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamW7" class="ui-widget-content">
+							  <img src="Images/SanJose.gif" width=50/>
+							</div>
+						</td>
+						<td>
+							<div id="teamW8" class="ui-widget-content">
+							  <img src="Images/Calgary.gif" width=50/>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</section>
+		<section class="page7">
+			<div class="page_container">
+				<br><br><br>
+				<center><img src="Images/trophy_stanleycup.jpg"/></center>
+				<center><h1>Thank you!</h1></center>
+			</div>
+		</section>
+	</div>
+</div>
+
+</body>
+</html>
